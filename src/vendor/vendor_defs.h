@@ -74,7 +74,7 @@
 #define MAX_USP_MSG_LEN (64*1024)
 
 // Period of time (in seconds) between polling values that have value change notification enabled on them
-#define VALUE_CHANGE_POLL_PERIOD  (30)
+#define VALUE_CHANGE_POLL_PERIOD  (10)
 
 // Location of the database file to use, if none is specified on the command line when invoking this executable
 // NOTE: As the database needs to be stored persistently, this should be changed to a directory which is not cleared on boot up

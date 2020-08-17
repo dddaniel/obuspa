@@ -32,7 +32,7 @@ TARGET_CFLAGS += -DUSE_MUSL
 endif
 
 define Package/obuspa/install
-	$(INSTALL_DIR) $(1)/usr/sbin $(1)/etc/obuspa
+	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/obuspa $(1)/usr/sbin/
 	$(CP) ./files/* $(1)/
 endef

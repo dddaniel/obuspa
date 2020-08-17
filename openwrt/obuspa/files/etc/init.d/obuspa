@@ -4,6 +4,7 @@ START=99
 USE_PROCD=1
 
 PROG=/usr/sbin/obuspa
+db_file=/etc/obuspa.db
 
 CTRL_PATH="Device.LocalAgent.Controller.1."
 MTP_PATH="Device.LocalAgent.MTP.1."
@@ -11,13 +12,9 @@ MTP_PATH="Device.LocalAgent.MTP.1."
 # todo: add config for protocols other than STOMP
 CONN_PATH="Device.STOMP.Connection.1."
 
-log() {
-	echo "${@}"|logger -t obuspa -p debug
-}
-
-db_set() {
-	log "DBSET param|${1}| value|${2}|"
-	${PROG} -c dbset ${1} ${2}
+db_set()
+{
+	${PROG} -f $db_file -c dbset ${1} ${2}
 }
 
 validate_controller_section()
@@ -95,8 +92,6 @@ configure_connection() {
 }
 
 db_init() {
-	[ -f /tmp/usp.db ] && rm -f /tmp/usp.db
-
 	config_load obuspa
 	config_foreach configure_connection connection
 	config_foreach configure_controller controller
@@ -112,6 +107,7 @@ start_service() {
 	procd_set_param env USP_BOARD_IFNAME=${l3device}
 	procd_set_param command ${PROG}
 	procd_append_param command -p -v 4 -i $USP_IFNAME
+	procd_append_param command -f $db_file
 	procd_set_param respawn
 	procd_set_param stdout 1
 	procd_set_param stderr 1

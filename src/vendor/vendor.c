@@ -46,6 +46,7 @@
 #include "usp_err_codes.h"
 #include "vendor_defs.h"
 #include "vendor_api.h"
+#include "vendor_bbfd.h"
 #include "usp_api.h"
 
 /*********************************************************************//**
@@ -61,8 +62,7 @@
 **************************************************************************/
 int VENDOR_Init(void)
 {
-
-    return USP_ERR_OK;
+	return vendor_bbfd_init();
 }
 
 
@@ -81,8 +81,7 @@ int VENDOR_Init(void)
 **************************************************************************/
 int VENDOR_Start(void)
 {
-
-    return USP_ERR_OK;
+	return vendor_bbfd_start();
 }
 
 /*********************************************************************//**
@@ -99,7 +98,6 @@ int VENDOR_Start(void)
 **************************************************************************/
 int VENDOR_Stop(void)
 {
-
-    return USP_ERR_OK;
+	return vendor_bbfd_stop();
 }
 
